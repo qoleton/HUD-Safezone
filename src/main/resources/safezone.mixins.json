@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.qoleton.safezone.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "WindowMixin",
+    "GuiGraphicsMixin",
+    "ClientHooksMixin",
+    "GameRendererMixin",
+    "GuiGraphicsCtorMixin",
+    "ScreenBackgroundMixin",
+    "compat.XaeroHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
