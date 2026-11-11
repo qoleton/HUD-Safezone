@@ -1,5 +1,7 @@
 # HUD Safezone
 
+<img src="icon.png" width="128" align="right" alt="HUD Safezone icon">
+
 A console-style **HUD safe zone** for Minecraft. Pick a frame, and the HUD and menus stay inside it.
 
 It's made for **ultrawide monitors** and for **recording or streaming**. If you play on a 32:9 or 21:9 screen but record a 21:9 or 16:9 crop, your hotbar, chat, minimap and item lists stay inside the part that ends up in the video.
