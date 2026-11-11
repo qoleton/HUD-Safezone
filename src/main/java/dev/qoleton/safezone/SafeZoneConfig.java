@@ -10,7 +10,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/** Stored in config/safezone.json. Margins are the fraction of the screen cut from EACH side. */
+/** Stored in config/hudsafezone.json. Margins are the fraction of the screen cut from EACH side. */
 public final class SafeZoneConfig {
     public static final double MAX_H = 0.25; // up to 50% of the width removed
     public static final double MAX_V = 0.20; // up to 40% of the height removed
@@ -40,11 +40,20 @@ public final class SafeZoneConfig {
     }
 
     private static Path path() {
-        return FMLPaths.CONFIGDIR.get().resolve("safezone.json");
+        return FMLPaths.CONFIGDIR.get().resolve("hudsafezone.json");
     }
 
     public static void load() {
         Path p = path();
+        // Carry over settings from builds made before the rename (config/safezone.json).
+        Path old = FMLPaths.CONFIGDIR.get().resolve("safezone.json");
+        if (!Files.exists(p) && Files.exists(old)) {
+            try {
+                Files.move(old, p);
+            } catch (IOException e) {
+                SafeZone.LOGGER.warn("Could not migrate {}", old, e);
+            }
+        }
         if (Files.exists(p)) {
             try (Reader r = Files.newBufferedReader(p)) {
                 SafeZoneConfig c = GSON.fromJson(r, SafeZoneConfig.class);
@@ -63,7 +72,7 @@ public final class SafeZoneConfig {
         try (Writer w = Files.newBufferedWriter(path())) {
             GSON.toJson(instance, w);
         } catch (IOException e) {
-            SafeZone.LOGGER.warn("Could not save safezone.json", e);
+            SafeZone.LOGGER.warn("Could not save hudsafezone.json", e);
         }
     }
 

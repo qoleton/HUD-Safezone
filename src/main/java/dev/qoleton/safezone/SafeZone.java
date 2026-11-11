@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 
 @Mod(value = SafeZone.MODID, dist = Dist.CLIENT)
 public final class SafeZone {
-    public static final String MODID = "safezone";
+    public static final String MODID = "hudsafezone";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public SafeZone(IEventBus modBus, ModContainer container) {

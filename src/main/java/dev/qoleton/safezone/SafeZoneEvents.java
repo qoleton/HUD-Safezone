@@ -75,7 +75,7 @@ public final class SafeZoneEvents {
             s.width = r.w();
             s.height = r.h();
         } else {
-            // Opened from inside a constrained menu (e.g. the Safe Zone button on Options): the window
+            // Opened from inside a constrained menu (e.g. the HUD Safezone button on Options): the window
             // reported the zone size, but this screen should use the whole screen.
             int[] real = SafeZoneState.realSize();
             s.width = real[0];
@@ -83,13 +83,13 @@ public final class SafeZoneEvents {
         }
     }
 
-    /** Adds the "Safe Zone..." button to the Options screen. */
+    /** Adds the "HUD Safezone..." button to the Options screen. */
     @SubscribeEvent
     public static void onInitPost(ScreenEvent.Init.Post event) {
         if (event.getScreen() instanceof OptionsScreen options) {
-            event.addListener(Button.builder(Component.literal("Safe Zone..."),
+            event.addListener(Button.builder(Component.literal("HUD Safezone..."),
                             b -> options.getMinecraft().setScreen(new SafeZoneScreen(options)))
-                    .bounds(6, 6, 90, 20)
+                    .bounds(6, 6, 104, 20)
                     .build());
         }
     }

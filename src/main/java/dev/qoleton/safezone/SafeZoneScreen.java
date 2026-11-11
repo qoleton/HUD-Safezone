@@ -28,7 +28,7 @@ public class SafeZoneScreen extends Screen {
     private Drag dragging = Drag.NONE;
 
     public SafeZoneScreen(Screen parent) {
-        super(Component.literal("Safe Zone"));
+        super(Component.literal("HUD Safezone"));
         this.parent = parent;
     }
 
@@ -171,7 +171,7 @@ public class SafeZoneScreen extends Screen {
 
         // Info text.
         int top = height / 2 - 124;
-        g.drawCenteredString(font, "SAFE ZONE", width / 2, top, ACCENT);
+        g.drawCenteredString(font, "HUD SAFEZONE", width / 2, top, ACCENT);
         g.drawCenteredString(font, "Drag the frame edges or pick a preset. Hover a button for help.", width / 2, top + 12, 0xFFDDDDDD);
         double pxW = r.w() * minecraft.getWindow().getGuiScale();
         double pxH = r.h() * minecraft.getWindow().getGuiScale();
