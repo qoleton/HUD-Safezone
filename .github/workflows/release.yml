@@ -1,0 +1,44 @@
+name: Release
+
+# Push a tag like v1.0.1 to build the mod and publish a GitHub Release with the jar attached.
+# Can also be started by hand from the Actions tab to test the build (no release is made then).
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-configuration-cache
+
+      - name: Upload jar (test runs)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hudsafezone-jar
+          path: build/libs/*.jar
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: HUD Safezone ${{ github.ref_name }}
+          files: build/libs/*.jar
+          generate_release_notes: true
